@@ -47,6 +47,9 @@ body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   color: var(--second-color);
+  background: radial-gradient(circle, #a3c9f9, #f0d0d0, #c0e4f7);
+  min-height: 100vh;
+  background-attachment: fixed; /* Keeps the gradient fixed while scrolling */
 }
 
 h1, h2, p {
@@ -120,7 +123,40 @@ img {
   justify-content: space-between;
   align-items: center;
   font-weight: var(--font-semi);
+  transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
 }
+
+.nav__logo {
+  color: var(--first-color); /* Logo color */
+  font-size: 1.5rem; /* Adjust logo size */
+  transition: color 0.3s ease-in-out; /* Smooth logo color transition */
+}
+
+/* Nav link hover animations */
+.nav__link {
+  position: relative;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-out; /* Smooth color and transform transition */
+}
+
+.nav__link:hover {
+  color: var(--first-color); /* Hover text color */
+  transform: scale(1.1); /* Slightly enlarge the link on hover */
+}
+
+.nav__link:hover::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 0.18rem;
+  left: 0;
+  top: 2rem;
+  background-color: var(--first-color);
+  animation: slideIn 0.3s forwards; /* Slide-in underline effect */
+}
+
+/* Mobile Menu - Slide In Effect */
 @media screen and (max-width: 767px) {
   .nav__menu {
     position: fixed;
@@ -130,35 +166,52 @@ img {
     height: 100%;
     padding: 2rem;
     background-color: var(--second-color);
-    transition: 0.5s;
+    transition: right 0.5s ease-out; /* Smooth slide-in transition */
+  }
+
+  .nav__menu.active {
+    right: 0; /* Move menu into view */
   }
 }
+
+/* Nav item animations */
 .nav__item {
   margin-bottom: var(--mb-4);
+  animation: fadeIn 0.5s ease-out; /* Fade-in effect for nav items */
 }
-.nav__link {
-  position: relative;
-  color: #fff;
-}
-.nav__link:hover {
-  position: relative;
-}
-.nav__link:hover::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 0.18rem;
-  left: 0;
-  top: 2rem;
-  background-color: var(--first-color);
-}
-.nav__logo {
-  color: var(--second-color);
-}
+
+/* Toggle button animation */
 .nav__toggle {
   color: var(--second-color);
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.3s ease-in-out; /* Smooth toggle transition */
+}
+
+.nav__toggle:hover {
+  transform: rotate(180deg); /* Rotate the toggle on hover */
+}
+
+/* Animation keyframes */
+
+/* Slide-in underline animation */
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Fade-in animation for nav items */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /*Active menu*/
@@ -284,7 +337,7 @@ img {
   position: absolute;
   left: 0;
   bottom: 0;
-  background-color: var(--first-color);
+  background: radial-gradient(circle, #4831fa, #df1dec, #f82e2e);
   height: 0.25rem;
   border-radius: 0.5rem;
   z-index: var(--z-back);
@@ -329,7 +382,7 @@ img {
 
 .work__img img {
   width: 100%;
-  height: auto;
+  height: 250px;
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
 }
@@ -343,7 +396,7 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #007bff;
   font-size: 24px;
   font-weight: bold;
   opacity: 0;
@@ -372,11 +425,6 @@ img {
 
 /* ===== CONTACT =====*/
 /* Contact Section */
-.contact {
-  padding: 60px 0;
-  background-color: #f4f4f4;
-}
-
 .contact .section-title {
   text-align: center;
   font-size: 2rem;
